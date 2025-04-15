@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +14,7 @@ interface Product {
   price: string;
 }
 
-const SearchPage = () => {
+const SearchComponent = () => {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState([]);
 
@@ -56,6 +56,14 @@ const SearchPage = () => {
         ))}
       </div>
     </div>
+  );
+};
+
+const SearchPage = () => {
+  return (
+    <Suspense fallback={"Hello"}>
+      <SearchComponent />
+    </Suspense>
   );
 };
 
